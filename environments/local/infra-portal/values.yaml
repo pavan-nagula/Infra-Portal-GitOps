@@ -13,9 +13,9 @@ backend:
   corsAllowedOrigins: "*"
 
   image:
-    repository: infra-portal-backend
-    tag: local
-    pullPolicy: Never        # Phase 1: image loaded into minikube directly; Phase 2 flips to IfNotPresent + GHCR repo
+    repository: ghcr.io/pavan-nagula/infra-portal-backend
+    tag: sha-838407c
+    pullPolicy: IfNotPresent
 
   serviceAccountName: default
 
@@ -38,9 +38,9 @@ ui:
   replicaCount: 1
 
   image:
-    repository: infra-portal-ui
-    tag: local
-    pullPolicy: Never
+    repository: ghcr.io/pavan-nagula/infra-portal-ui
+    tag: sha-838407c
+    pullPolicy: IfNotPresent
 
   serviceAccountName: default
 
