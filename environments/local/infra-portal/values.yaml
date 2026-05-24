@@ -1,0 +1,56 @@
+# ============================
+# Local minikube environment values for infra-portal
+# Applied on top of charts/infra-portal/values.yaml
+# Humans edit image.tag here to "deploy" a new build.
+# ============================
+
+namespace: infra-portal-dev
+
+backend:
+  replicaCount: 1
+  profile: dev
+  securityEnabled: "false"
+  corsAllowedOrigins: "*"
+
+  image:
+    repository: infra-portal-backend
+    tag: local
+    pullPolicy: Never        # Phase 1: image loaded into minikube directly; Phase 2 flips to IfNotPresent + GHCR repo
+
+  serviceAccountName: default
+
+  secrets:
+    githubToken: ""
+    apiKey: ""
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+  autoscaling:
+    enabled: false
+
+ui:
+  replicaCount: 1
+
+  image:
+    repository: infra-portal-ui
+    tag: local
+    pullPolicy: Never
+
+  serviceAccountName: default
+
+  resources:
+    requests:
+      cpu: 25m
+      memory: 32Mi
+    limits:
+      cpu: 100m
+      memory: 64Mi
+
+ingress:
+  enabled: false
